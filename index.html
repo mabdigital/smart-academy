@@ -3103,37 +3103,106 @@
 
   </main>
 
-  <!-- Academy Portal Footer -->
-  <footer class="academy-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <div class="brand-logo-badge" style="width: 38px; height: 38px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-              <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-            </svg>
-          </div>
-          <div>
-            <div style="font-weight: 800; font-size: 1.1rem;">Smart Academy</div>
-            <div style="font-size: 0.75rem; color: var(--text-muted);">Empowering Next-Gen Tech Pioneers</div>
-          </div>
-        </div>
+<!-- Enrollment Form & Payment Section -->
+<section id="enrollment-section" style="padding: 40px 20px; background: #ffffff; border-radius: 12px; margin: 40px auto; max-width: 800px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); font-family: sans-serif;">
+  <h2 style="text-align: center; color: #1e293b; margin-top: 0;">Course Enrollment & Payment Portal</h2>
+  <p style="text-align: center; color: #64748b; margin-bottom: 25px;">Please complete the fee transfer first, then fill out the form below to confirm your enrollment.</p>
 
-        <nav class="footer-nav-links" aria-label="Footer quick navigation">
-          <button type="button" class="footer-nav-btn" data-tab-target="overview">Overview</button>
-          <button type="button" class="footer-nav-btn" data-tab-target="eligibility">Eligibility</button>
-          <button type="button" class="footer-nav-btn" data-tab-target="calculator">Calculator</button>
-          <button type="button" class="footer-nav-btn" data-tab-target="catalog">Catalog</button>
-        </nav>
-      </div>
+  <!-- Payment Details Box -->
+  <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 20px; border-radius: 8px; margin-bottom: 25px;">
+    <h3 style="margin-top: 0; color: #2563eb;">Payment Account Options</h3>
+    
+    <p style="margin-bottom: 5px;"><strong>Option 1: Mobile Wallet</strong></p>
+    <p style="margin: 4px 0;"><strong>EasyPaisa / JazzCash:</strong> 0312-8602440</p>
+    <p style="margin: 4px 0;"><strong>Account Title:</strong> Syed Oan</p>
+    
+    <hr style="border: 0; border-top: 1px solid #cbd5e1; margin: 15px 0;">
+    
+    <p style="margin-bottom: 5px;"><strong>Option 2: Bank Transfer</strong></p>
+    <p style="margin: 4px 0;"><strong>Bank Name:</strong> United Bank Limited (UBL)</p>
+    <p style="margin: 4px 0;"><strong>Account Title:</strong> Syed Oan Muhammad</p>
+    <p style="margin: 4px 0;"><strong>Account Number:</strong> 05663325574156</p>
 
-      <div class="footer-bottom">
-        <div>&copy; 2026 Smart Academy Inc. All rights reserved.</div>
-        <div>Academic Session 2026-27 • Institutional Portal</div>
-      </div>
+    <p style="font-size: 13px; color: #d97706; margin-top: 15px; margin-bottom: 0;">
+      * Transfer complete hone ke baad milne wali Transaction ID (TID) niche form me enter karein.
+    </p>
+  </div>
+
+  <!-- Admission Form -->
+  <form action="YOUR_FORMSPREE_URL_HERE" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+    <div>
+      <label style="display: block; font-weight: 600; margin-bottom: 5px; color: #334155;">Full Name</label>
+      <input type="text" name="Student Name" required placeholder="Enter your full name" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box;">
     </div>
-  </footer>
+
+    <div>
+      <label style="display: block; font-weight: 600; margin-bottom: 5px; color: #334155;">Email Address</label>
+      <input type="email" name="Student Email" required placeholder="name@example.com" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box;">
+    </div>
+
+    <div>
+      <label style="display: block; font-weight: 600; margin-bottom: 5px; color: #334155;">Phone / WhatsApp Number</label>
+      <input type="tel" name="Phone Number" required placeholder="+92 300 0000000" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box;">
+    </div>
+
+    <div>
+      <label style="display: block; font-weight: 600; margin-bottom: 5px; color: #334155;">Select Course</label>
+      <select name="Selected Course" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box;">
+        <option>Digital Marketing & SEO</option>
+        <option>Web Design & Front-End Development</option>
+        <option>E-commerce & Dropshipping</option>
+      </select>
+    </div>
+
+    <div>
+      <label style="display: block; font-weight: 600; margin-bottom: 5px; color: #334155;">Transaction ID (TID)</label>
+      <input type="text" name="Transaction ID" required placeholder="Enter Payment TID / Ref No." style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box;">
+    </div>
+
+    <button type="submit" style="background: #2563eb; color: #ffffff; padding: 12px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 16px;">
+      Submit Admission Request
+    </button>
+  </form>
+</section>
+
+<!-- Modern Professional Footer -->
+<footer style="background-color: #0f172a; color: #94a3b8; padding: 50px 20px 20px; font-family: sans-serif; margin-top: 60px;">
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
+    
+    <!-- Col 1: About -->
+    <div style="flex: 1 1 250px;">
+      <h3 style="color: #ffffff; margin-bottom: 15px; margin-top: 0;">Smart Academy</h3>
+      <p style="line-height: 1.6; font-size: 14px;">Empowering Next-Gen Tech Pioneers with practical skills, real-world projects, and career guidance.</p>
+    </div>
+
+    <!-- Col 2: Quick Links -->
+    <div style="flex: 1 1 150px;">
+      <h4 style="color: #ffffff; margin-bottom: 15px; margin-top: 0;">Quick Links</h4>
+      <ul style="list-style: none; padding: 0; line-height: 2; font-size: 14px;">
+        <li><a href="#" style="color: #94a3b8; text-decoration: none;">Overview</a></li>
+        <li><a href="#" style="color: #94a3b8; text-decoration: none;">Eligibility Checker</a></li>
+        <li><a href="#" style="color: #94a3b8; text-decoration: none;">Fee Calculator</a></li>
+        <li><a href="#" style="color: #94a3b8; text-decoration: none;">Courses Catalog</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 3: Contact Details -->
+    <div style="flex: 1 1 200px;">
+      <h4 style="color: #ffffff; margin-bottom: 15px; margin-top: 0;">Contact Support</h4>
+      <p style="font-size: 14px; margin-bottom: 8px;"><strong>Email:</strong> imdigitalexpert99@gmail.com</p>
+      <p style="font-size: 14px; margin-bottom: 8px;"><strong>Phone/WhatsApp:</strong> +92 312 8602440</p>
+      <p style="font-size: 14px;"><strong>Agency:</strong> Digital Growth Studio</p>
+    </div>
+  </div>
+
+  <hr style="border: 0; border-top: 1px solid #1e293b; margin: 30px 0 20px;">
+
+  <!-- Bottom Bar -->
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; font-size: 13px; color: #64748b;">
+    <p style="margin: 0;">© 2026 Smart Academy Inc. All rights reserved.</p>
+    <p style="margin: 0;">Powered by <span style="color: #38bdf8;">Digital Growth Studio</span></p>
+  </div>
+</footer>
 
   <!-- Floating Toast Notification -->
   <div class="toast-box" id="toast-notification" role="status" aria-live="polite">
