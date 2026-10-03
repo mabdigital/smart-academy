@@ -1,0 +1,3797 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Academy - Student Portal & Tuition Estimator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       CSS Custom Properties & Color Systems (Light / Dark)
+       ========================================================================== */
+    :root {
+      /* Brand Palette */
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --primary-light: #eef2ff;
+      --primary-glow: rgba(79, 70, 229, 0.22);
+      
+      --accent: #06b6d4;
+      --accent-glow: rgba(6, 182, 212, 0.22);
+      
+      --success: #10b981;
+      --success-dark: #059669;
+      --success-bg: #ecfdf5;
+      --success-border: #a7f3d0;
+      --success-text: #065f46;
+      
+      --info: #3b82f6;
+      --info-dark: #2563eb;
+      --info-bg: #eff6ff;
+      --info-border: #bfdbfe;
+      --info-text: #1e40af;
+      
+      --warning: #f59e0b;
+      --warning-bg: #fffbeb;
+      --warning-border: #fde68a;
+      --warning-text: #92400e;
+      
+      --danger: #ef4444;
+      --danger-dark: #dc2626;
+      --danger-bg: #fef2f2;
+      --danger-border: #fecaca;
+      --danger-text: #991b1b;
+      
+      /* Light Theme Base */
+      --bg-page: #f8fafc;
+      --bg-gradient-1: #eef2ff;
+      --bg-gradient-2: #f0fdfa;
+      
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --card-bg-solid: #ffffff;
+      --card-border: rgba(226, 232, 240, 0.9);
+      --card-border-hover: rgba(99, 102, 241, 0.4);
+      --card-subtle: #f1f5f9;
+      
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-subtle: #94a3b8;
+      
+      --input-bg: #ffffff;
+      --input-border: #cbd5e1;
+      --input-focus-border: #6366f1;
+      
+      --receipt-bg: #ffffff;
+      --receipt-border: #e2e8f0;
+      --receipt-notch: #f8fafc;
+      
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.08), 0 2px 6px -2px rgba(15, 23, 42, 0.04);
+      --shadow-lg: 0 12px 28px -4px rgba(15, 23, 42, 0.09), 0 4px 12px -3px rgba(15, 23, 42, 0.05);
+      --shadow-xl: 0 20px 35px -5px rgba(79, 70, 229, 0.12), 0 10px 18px -4px rgba(15, 23, 42, 0.04);
+      
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+      --radius-full: 9999px;
+      
+      --transition-fast: 0.18s ease;
+      --transition-normal: 0.28s ease;
+      --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="dark"] {
+      /* Dark Theme */
+      --bg-page: #090d16;
+      --bg-gradient-1: #0f172a;
+      --bg-gradient-2: #091e2b;
+      
+      --card-bg: rgba(17, 24, 39, 0.82);
+      --card-bg-solid: #111827;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-hover: rgba(99, 102, 241, 0.5);
+      --card-subtle: #1f293d;
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-subtle: #64748b;
+      
+      --input-bg: #131b2e;
+      --input-border: #334155;
+      --input-focus-border: #818cf8;
+      
+      --receipt-bg: #111a2e;
+      --receipt-border: rgba(255, 255, 255, 0.09);
+      --receipt-notch: #090d16;
+      
+      --primary-light: rgba(99, 102, 241, 0.18);
+      
+      --success-bg: rgba(16, 185, 129, 0.15);
+      --success-border: rgba(16, 185, 129, 0.35);
+      --success-text: #34d399;
+      
+      --info-bg: rgba(59, 130, 246, 0.15);
+      --info-border: rgba(59, 130, 246, 0.35);
+      --info-text: #60a5fa;
+      
+      --warning-bg: rgba(245, 158, 11, 0.15);
+      --warning-border: rgba(245, 158, 11, 0.35);
+      --warning-text: #fbbf24;
+      
+      --danger-bg: rgba(239, 68, 68, 0.15);
+      --danger-border: rgba(239, 68, 68, 0.35);
+      --danger-text: #f87171;
+      
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 4px 14px 0 rgba(0, 0, 0, 0.45);
+      --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.55);
+      --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.65);
+    }
+
+    /* ==========================================================================
+       Reset & Base Styles
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      transition: background-color var(--transition-smooth), color var(--transition-smooth);
+      padding-top: 80px; /* Space for fixed header */
+    }
+
+    /* Ambient Background Glow Mesh */
+    .bg-mesh {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.65;
+      overflow: hidden;
+      transition: opacity var(--transition-smooth);
+    }
+
+    .mesh-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+    }
+
+    .mesh-orb-1 {
+      width: 500px;
+      height: 500px;
+      top: -100px;
+      right: -100px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, rgba(99, 102, 241, 0) 70%);
+    }
+
+    .mesh-orb-2 {
+      width: 600px;
+      height: 600px;
+      bottom: -150px;
+      left: -150px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.14) 0%, rgba(6, 182, 212, 0) 70%);
+    }
+
+    .mesh-orb-3 {
+      width: 400px;
+      height: 400px;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(79, 70, 229, 0.08) 0%, rgba(79, 70, 229, 0) 70%);
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ==========================================================================
+       Fixed Top Header & Tab Navigation
+       ========================================================================== */
+    .top-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      z-index: 1000;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--card-border);
+      transition: background-color var(--transition-smooth), border-color var(--transition-smooth);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      gap: 1rem;
+    }
+
+    /* Academy Branding Logo */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .brand-logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      box-shadow: 0 6px 18px var(--primary-glow);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .brand-logo-badge::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.25), transparent);
+    }
+
+    .brand-logo-badge svg {
+      width: 22px;
+      height: 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 1.22rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      background: linear-gradient(135deg, var(--text-main) 60%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-tagline {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    /* Tabbed Navigation Bar */
+    .nav-tabs-wrapper {
+      display: flex;
+      align-items: center;
+      background: var(--card-subtle);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-full);
+      padding: 4px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.15rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      outline: none;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .nav-tab-btn:hover {
+      color: var(--text-main);
+    }
+
+    .nav-tab-btn.active {
+      color: var(--primary);
+      background: var(--card-bg-solid);
+      box-shadow: var(--shadow-sm);
+      font-weight: 700;
+    }
+
+    [data-theme="dark"] .nav-tab-btn.active {
+      color: #ffffff;
+      background: var(--primary);
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    .nav-tab-btn .tab-icon {
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    /* Header Right Actions */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    /* Admission Live Pill */
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-full);
+      background: var(--card-subtle);
+      border: 1px solid var(--card-border);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .status-dot-pulse {
+      position: relative;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+
+    .status-dot-pulse::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--success);
+      opacity: 0.5;
+      animation: pulse 1.8s infinite cubic-bezier(0.4, 0, 0.6, 1);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.6); opacity: 0; }
+    }
+
+    /* Dark/Light Theme Toggle Switch */
+    .theme-switch-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    .theme-toggle-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 66px;
+      height: 36px;
+      padding: 4px;
+      background: var(--card-subtle);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--transition-normal);
+      outline: none;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--input-focus-border);
+    }
+
+    .theme-toggle-btn svg {
+      width: 16px;
+      height: 16px;
+      position: relative;
+      z-index: 1;
+      transition: color var(--transition-normal);
+    }
+
+    .theme-icon-sun {
+      color: #f59e0b;
+      margin-left: 5px;
+    }
+
+    .theme-icon-moon {
+      color: #94a3b8;
+      margin-right: 5px;
+    }
+
+    .theme-toggle-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--card-bg-solid);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color var(--transition-normal);
+      z-index: 2;
+    }
+
+    [data-theme="dark"] .theme-toggle-thumb {
+      transform: translateX(30px);
+      background: var(--primary);
+    }
+
+    [data-theme="dark"] .theme-icon-moon {
+      color: #f8fafc;
+    }
+
+    /* ==========================================================================
+       Tab Content & Transitions
+       ========================================================================== */
+    .tab-view-container {
+      padding: 2.2rem 0 4rem;
+      min-height: calc(100vh - 160px);
+    }
+
+    .tab-pane {
+      display: none;
+      animation: tabFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    @keyframes tabFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Section Subheaders */
+    .tab-header-banner {
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .tab-title-group h2 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+    }
+
+    .tab-title-group p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+    }
+
+    /* ==========================================================================
+       TAB 1: Overview / Home Section
+       ========================================================================== */
+    .hero-banner-card {
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.08) 100%), var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-xl);
+      padding: 2.8rem 2.5rem;
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-banner-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 2px 8px var(--primary-glow);
+    }
+
+    [data-theme="dark"] .hero-badge-tag {
+      color: #a5b4fc;
+    }
+
+    .hero-title-main {
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.16;
+      margin-bottom: 1rem;
+      max-width: 800px;
+    }
+
+    .hero-text-highlight {
+      background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-lead-text {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    /* Portal Stats Grid */
+    .portal-stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      margin-bottom: 2.8rem;
+    }
+
+    .stat-chip {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition-normal), border-color var(--transition-normal);
+    }
+
+    .stat-chip:hover {
+      transform: translateY(-3px);
+      border-color: var(--card-border-hover);
+    }
+
+    .stat-chip-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .stat-chip-icon.icon-blue { background: rgba(59, 130, 246, 0.12); color: #3b82f6; }
+    .stat-chip-icon.icon-green { background: rgba(16, 185, 129, 0.12); color: #10b981; }
+    .stat-chip-icon.icon-purple { background: rgba(147, 51, 234, 0.12); color: #9333ea; }
+    .stat-chip-icon.icon-amber { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
+
+    .stat-chip-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .stat-chip-info {
+      text-align: left;
+    }
+
+    .stat-chip-value {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .stat-chip-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    /* Quick Action Cards */
+    .quick-actions-section {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-headline {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .quick-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .action-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-xl);
+      padding: 2rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .action-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--card-border-hover);
+    }
+
+    .action-card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.35rem;
+    }
+
+    .action-card-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-bottom: 0.6rem;
+    }
+
+    .action-card-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+      flex-grow: 1;
+    }
+
+    /* Overview Highlights Bar */
+    .features-quad-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    .feature-box {
+      background: var(--card-subtle);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem;
+      transition: border-color var(--transition-fast);
+    }
+
+    .feature-box:hover {
+      border-color: var(--primary);
+    }
+
+    .feature-box h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .feature-box p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       Two-Column Layouts for Tools (Eligibility & Calculator)
+       ========================================================================== */
+    .tool-grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-xl);
+      padding: 2.2rem;
+      box-shadow: var(--shadow-lg);
+      transition: all var(--transition-normal);
+      position: relative;
+    }
+
+    .glass-card:hover {
+      box-shadow: var(--shadow-xl);
+    }
+
+    .card-header-block {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.6rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .card-title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .card-icon-pill {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-light);
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .card-icon-pill {
+      color: #818cf8;
+    }
+
+    .card-icon-pill svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .card-subtitle {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .card-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.3rem 0.65rem;
+      border-radius: var(--radius-full);
+      background: var(--card-subtle);
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+    }
+
+    /* ==========================================================================
+       Forms & Modern Inputs
+       ========================================================================== */
+    .form-group {
+      margin-bottom: 1.35rem;
+    }
+
+    .form-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-label-hint {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 1rem;
+      color: var(--text-subtle);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .input-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .form-control {
+      width: 100%;
+      height: 48px;
+      padding: 0 1rem 0 2.85rem;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      color: var(--text-main);
+      background-color: var(--input-bg);
+      border: 1.5px solid var(--input-border);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-fast);
+      outline: none;
+    }
+
+    .form-control:focus {
+      border-color: var(--input-focus-border);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    .form-control.has-error {
+      border-color: var(--danger) !important;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
+    }
+
+    .error-feedback {
+      display: none;
+      font-size: 0.78rem;
+      color: var(--danger);
+      margin-top: 0.4rem;
+      font-weight: 500;
+    }
+
+    .error-feedback.show {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Percentage Input with Preset Buttons */
+    .percentage-input-box {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .percentage-field {
+      flex: 1;
+      position: relative;
+    }
+
+    .percentage-symbol {
+      position: absolute;
+      right: 1.1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: 700;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .preset-chips {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .preset-chip {
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      background: var(--card-subtle);
+      border: 1px solid var(--card-border);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .preset-chip:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* Course Selection Interactive Radios */
+    .course-options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+
+    .course-radio-card {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .course-radio-card input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .course-card-content {
+      padding: 0.85rem;
+      border-radius: var(--radius-md);
+      background: var(--input-bg);
+      border: 1.5px solid var(--input-border);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      transition: all var(--transition-fast);
+      height: 100%;
+    }
+
+    .course-radio-card:hover .course-card-content {
+      border-color: var(--card-border-hover);
+      transform: translateY(-1px);
+    }
+
+    .course-radio-card input[type="radio"]:checked + .course-card-content {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    .course-icon-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--card-subtle);
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .course-radio-card input[type="radio"]:checked + .course-card-content .course-icon-badge {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .course-icon-badge svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .course-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .course-name-label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.25;
+    }
+
+    .course-fee-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: 2px;
+      font-family: var(--font-mono);
+    }
+
+    [data-theme="dark"] .course-fee-tag {
+      color: #818cf8;
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      gap: 0.85rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      height: 48px;
+      padding: 0 1.5rem;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all var(--transition-normal);
+      border: none;
+      outline: none;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #4338ca 0%, #3730a3 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--primary-glow);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      background: var(--card-subtle);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      padding: 0 1.25rem;
+    }
+
+    .btn-secondary:hover {
+      background: var(--card-border);
+      color: var(--text-main);
+    }
+
+    .btn-outline-primary {
+      background: transparent;
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
+    }
+
+    .btn-outline-primary:hover {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* ==========================================================================
+       Admission Checker Result Card
+       ========================================================================== */
+    .result-card-placeholder {
+      padding: 3.5rem 1.5rem;
+      border: 2px dashed var(--card-border);
+      border-radius: var(--radius-xl);
+      text-align: center;
+      color: var(--text-muted);
+      background: var(--card-subtle);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      height: 100%;
+      min-height: 420px;
+    }
+
+    .result-card-placeholder svg {
+      width: 52px;
+      height: 52px;
+      color: var(--text-subtle);
+      opacity: 0.7;
+    }
+
+    .admission-result-card {
+      display: none;
+      background: var(--card-bg-solid);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideUpFade {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .result-header {
+      padding: 1.35rem 1.75rem;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--card-subtle);
+    }
+
+    .result-header-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .token-badge {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-sm);
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .result-body {
+      padding: 1.75rem;
+    }
+
+    /* Dynamic Status Badge (Specific Criteria) */
+    .status-banner-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.95rem;
+      padding: 1.1rem 1.35rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 1.45rem;
+      font-weight: 700;
+      font-size: 1.05rem;
+      line-height: 1.3;
+      border: 1.5px solid transparent;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-normal);
+    }
+
+    .status-banner-badge.status-green {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+      color: var(--success-text);
+    }
+
+    .status-banner-badge.status-blue {
+      background: var(--info-bg);
+      border-color: var(--info-border);
+      color: var(--info-text);
+    }
+
+    .status-banner-badge.status-red {
+      background: var(--danger-bg);
+      border-color: var(--danger-border);
+      color: var(--danger-text);
+    }
+
+    .status-badge-icon {
+      font-size: 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .status-badge-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .status-badge-title {
+      font-size: 1.08rem;
+      font-weight: 800;
+    }
+
+    .status-badge-desc {
+      font-size: 0.8rem;
+      font-weight: 500;
+      opacity: 0.9;
+      margin-top: 2px;
+    }
+
+    /* Output Summary Grid */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.9rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .summary-item {
+      padding: 0.9rem 1.1rem;
+      border-radius: var(--radius-md);
+      background: var(--card-subtle);
+      border: 1px solid var(--card-border);
+    }
+
+    .summary-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .summary-value {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .score-meter-wrap {
+      margin-top: 0.5rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .score-meter-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .score-meter-track {
+      width: 100%;
+      height: 8px;
+      border-radius: var(--radius-full);
+      background: var(--card-subtle);
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+    }
+
+    .score-meter-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fill-green { background: linear-gradient(90deg, #10b981, #34d399); }
+    .fill-blue { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+    .fill-red { background: linear-gradient(90deg, #ef4444, #f87171); }
+
+    .result-footer-actions {
+      display: flex;
+      gap: 0.75rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .btn-sm {
+      height: 40px;
+      padding: 0 1.15rem;
+      font-size: 0.85rem;
+    }
+
+    /* ==========================================================================
+       Course Fee Calculator Styles
+       ========================================================================== */
+    .calculator-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    /* Course Cards Selection (Calc) */
+    .calc-course-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.85rem;
+    }
+
+    .calc-course-card {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .calc-course-card input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .calc-card-box {
+      padding: 1.1rem;
+      border-radius: var(--radius-lg);
+      background: var(--input-bg);
+      border: 2px solid var(--input-border);
+      transition: all var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .calc-course-card:hover .calc-card-box {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .calc-course-card input[type="radio"]:checked + .calc-card-box {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      box-shadow: 0 6px 20px var(--primary-glow);
+    }
+
+    .calc-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .calc-card-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--card-subtle);
+      color: var(--primary);
+      transition: all var(--transition-fast);
+    }
+
+    .calc-course-card input[type="radio"]:checked + .calc-card-box .calc-card-icon {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .calc-card-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .calc-radio-indicator {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid var(--input-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-fast);
+    }
+
+    .calc-course-card input[type="radio"]:checked + .calc-card-box .calc-radio-indicator {
+      border-color: var(--primary);
+      background: var(--primary);
+    }
+
+    .calc-radio-indicator::after {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ffffff;
+      opacity: 0;
+      transform: scale(0);
+      transition: all var(--transition-fast);
+    }
+
+    .calc-course-card input[type="radio"]:checked + .calc-card-box .calc-radio-indicator::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .calc-course-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.25;
+      margin-bottom: 0.35rem;
+    }
+
+    .calc-rate-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.25rem;
+    }
+
+    .calc-rate-amount {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: var(--font-mono);
+    }
+
+    [data-theme="dark"] .calc-rate-amount {
+      color: #818cf8;
+    }
+
+    .calc-rate-unit {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* Duration Selector & Range Slider */
+    .duration-control-card {
+      background: var(--card-subtle);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem;
+    }
+
+    .duration-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .duration-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .duration-counter-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius-md);
+    }
+
+    .duration-stepper-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--card-border);
+      background: var(--card-subtle);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: all var(--transition-fast);
+      outline: none;
+    }
+
+    .duration-stepper-btn:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .duration-display-val {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      min-width: 45px;
+      text-align: center;
+    }
+
+    /* Slider Track */
+    .range-slider-wrapper {
+      position: relative;
+      margin: 1.25rem 0 0.75rem;
+    }
+
+    .custom-range-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: var(--radius-full);
+      background: var(--card-border);
+      outline: none;
+      transition: background var(--transition-fast);
+    }
+
+    .custom-range-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--primary-glow);
+      border: 3px solid #ffffff;
+      transition: transform var(--transition-fast);
+    }
+
+    .custom-range-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.18);
+    }
+
+    .custom-range-slider::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--primary-glow);
+      border: 3px solid #ffffff;
+    }
+
+    /* Preset Duration Chips */
+    .duration-presets {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.85rem;
+    }
+
+    .duration-chip {
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .duration-chip:hover,
+    .duration-chip.active {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* Discount Rule Alert Card */
+    .discount-rule-banner {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.85rem 1.15rem;
+      border-radius: var(--radius-md);
+      background: var(--card-subtle);
+      border: 1px solid var(--card-border);
+      transition: all var(--transition-normal);
+    }
+
+    .discount-rule-banner.active-tier {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+      color: var(--success-text);
+    }
+
+    .discount-rule-icon {
+      font-size: 1.35rem;
+      flex-shrink: 0;
+    }
+
+    .discount-rule-content {
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .discount-rule-title {
+      font-weight: 700;
+    }
+
+    /* Receipt-Style Result Breakdown */
+    .receipt-container {
+      position: relative;
+    }
+
+    .fee-receipt {
+      background: var(--receipt-bg);
+      border: 1px solid var(--receipt-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-xl);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Notches decoration on side */
+    .fee-receipt::before,
+    .fee-receipt::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 22px;
+      height: 22px;
+      background: var(--bg-page);
+      border-radius: 50%;
+      z-index: 2;
+      border: 1px solid var(--receipt-border);
+      transform: translateY(-50%);
+    }
+
+    .fee-receipt::before {
+      left: -12px;
+      clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
+    }
+
+    .fee-receipt::after {
+      right: -12px;
+      clip-path: polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%);
+    }
+
+    .receipt-top {
+      padding: 1.75rem 2rem 1.25rem;
+      background: linear-gradient(180deg, var(--card-subtle) 0%, transparent 100%);
+      border-bottom: 1.5px dashed var(--receipt-border);
+      text-align: center;
+      position: relative;
+    }
+
+    .receipt-badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid var(--success-border);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.65rem;
+    }
+
+    .receipt-heading {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    .receipt-subtext {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      margin-top: 2px;
+    }
+
+    .receipt-body {
+      padding: 1.75rem 2rem;
+    }
+
+    .receipt-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.25rem;
+    }
+
+    .receipt-table tr {
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .receipt-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .receipt-table td {
+      padding: 0.85rem 0;
+      font-size: 0.95rem;
+    }
+
+    .receipt-label-col {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .receipt-val-col {
+      text-align: right;
+      font-weight: 700;
+      color: var(--text-main);
+      font-family: var(--font-mono);
+    }
+
+    .receipt-discount-row {
+      color: var(--success) !important;
+    }
+
+    .receipt-discount-row .receipt-label-col {
+      color: var(--success) !important;
+      font-weight: 600;
+    }
+
+    .receipt-discount-row .receipt-val-col {
+      color: var(--success) !important;
+    }
+
+    .discount-pill-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: var(--radius-sm);
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      margin-left: 0.4rem;
+      vertical-align: middle;
+    }
+
+    /* Final Payable Highlight Box */
+    .receipt-total-box {
+      margin-top: 1.25rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--card-subtle);
+      border-radius: var(--radius-lg);
+      border: 1.5px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .total-title-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .total-main-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .total-sub-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .total-amount-display {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: var(--font-mono);
+      letter-spacing: -0.02em;
+    }
+
+    [data-theme="dark"] .total-amount-display {
+      color: #818cf8;
+    }
+
+    .receipt-footer-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    /* ==========================================================================
+       TAB 4: Course Catalog Section
+       ========================================================================== */
+    .courses-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .catalog-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-xl);
+      padding: 1.85rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all var(--transition-normal);
+      position: relative;
+    }
+
+    .catalog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--card-border-hover);
+    }
+
+    .catalog-badge-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      width: fit-content;
+      margin-bottom: 1.25rem;
+    }
+
+    .catalog-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .catalog-card-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+
+    .catalog-card-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 1.25rem;
+    }
+
+    .catalog-features-list {
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .catalog-features-list li {
+      font-size: 0.82rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .catalog-features-list li svg {
+      width: 14px;
+      height: 14px;
+      color: var(--success);
+      flex-shrink: 0;
+    }
+
+    .catalog-card-bottom {
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .catalog-price-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .catalog-price-val {
+      font-size: 1.2rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--text-main);
+    }
+
+    .catalog-price-unit {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .btn-select-track {
+      padding: 0.5rem 0.95rem;
+      border-radius: var(--radius-md);
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .btn-select-track:hover {
+      background: var(--primary);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       Footer
+       ========================================================================== */
+    .academy-footer {
+      border-top: 1px solid var(--card-border);
+      background: var(--card-bg);
+      padding: 3rem 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .footer-nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-nav-btn {
+      background: transparent;
+      border: none;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color var(--transition-fast);
+      font-weight: 500;
+      font-family: var(--font-sans);
+    }
+
+    .footer-nav-btn:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-subtle);
+    }
+
+    /* ==========================================================================
+       Confetti Canvas & Toast Notification
+       ========================================================================== */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .toast-box {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--card-bg-solid);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1.25rem;
+      box-shadow: var(--shadow-xl);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      z-index: 10000;
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .toast-box.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast-icon {
+      color: var(--success);
+      display: flex;
+      align-items: center;
+    }
+
+    .toast-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Print Style */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding-top: 0 !important;
+      }
+      .top-header, .academy-footer, .btn-row, .result-footer-actions, .theme-switch-wrapper, .bg-mesh, .nav-tabs-wrapper, .quick-actions-section {
+        display: none !important;
+      }
+      .tab-pane {
+        display: block !important;
+      }
+      .tool-grid-2col {
+        display: block !important;
+      }
+      .glass-card {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+      }
+      .admission-result-card, .fee-receipt {
+        display: block !important;
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+      }
+    }
+
+    /* ==========================================================================
+       Responsive Breakpoints
+       ========================================================================== */
+    @media (max-width: 1080px) {
+      .nav-tabs-wrapper {
+        order: 3;
+        width: 100%;
+        overflow-x: auto;
+        padding: 3px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .header-inner {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 0.75rem 0;
+      }
+      body {
+        padding-top: 130px;
+      }
+      .top-header {
+        height: auto;
+      }
+      .courses-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .portal-stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .quick-actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .features-quad-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .tool-grid-2col {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-tab-btn {
+        padding: 0.45rem 0.8rem;
+        font-size: 0.82rem;
+      }
+      .nav-tab-btn .tab-label {
+        font-size: 0.8rem;
+      }
+      .status-pill {
+        display: none;
+      }
+      .portal-stats-bar {
+        grid-template-columns: 1fr;
+      }
+      .quick-actions-grid {
+        grid-template-columns: 1fr;
+      }
+      .features-quad-grid {
+        grid-template-columns: 1fr;
+      }
+      .courses-grid-4 {
+        grid-template-columns: 1fr;
+      }
+      .course-options-grid,
+      .calc-course-grid {
+        grid-template-columns: 1fr;
+      }
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+      .btn-row {
+        flex-direction: column;
+      }
+      .fee-receipt::before,
+      .fee-receipt::after {
+        display: none;
+      }
+      .receipt-total-box {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      .hero-banner-card {
+        padding: 2rem 1.4rem;
+      }
+      .glass-card {
+        padding: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Glowing Mesh Background -->
+  <div class="bg-mesh" aria-hidden="true">
+    <div class="mesh-orb mesh-orb-1"></div>
+    <div class="mesh-orb mesh-orb-2"></div>
+    <div class="mesh-orb mesh-orb-3"></div>
+  </div>
+
+  <!-- Confetti Canvas for Direct Admission Celebration -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- =========================================================================
+       Fixed Top Navigation Bar & Header
+       ========================================================================= -->
+  <header class="top-header">
+    <div class="container">
+      <div class="header-inner">
+        
+        <!-- Academy Branding Logo -->
+        <div class="brand" data-tab-target="overview" role="button" tabindex="0" title="Go to Overview / Home">
+          <div class="brand-logo-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">Smart Academy</span>
+            <span class="brand-tagline">Academic & Enrollment Portal</span>
+          </div>
+        </div>
+
+        <!-- Tab Buttons (Navigation) -->
+        <nav class="nav-tabs-wrapper" aria-label="Main Navigation Tabs" role="tablist">
+          <button class="nav-tab-btn active" data-tab-target="overview" role="tab" aria-selected="true" aria-controls="tab-overview" id="tab-btn-overview">
+            <span class="tab-icon">🏠</span>
+            <span class="tab-label">Overview</span>
+          </button>
+          <button class="nav-tab-btn" data-tab-target="eligibility" role="tab" aria-selected="false" aria-controls="tab-eligibility" id="tab-btn-eligibility">
+            <span class="tab-icon">🎓</span>
+            <span class="tab-label">Eligibility Checker</span>
+          </button>
+          <button class="nav-tab-btn" data-tab-target="calculator" role="tab" aria-selected="false" aria-controls="tab-calculator" id="tab-btn-calculator">
+            <span class="tab-icon">💰</span>
+            <span class="tab-label">Fee Calculator</span>
+          </button>
+          <button class="nav-tab-btn" data-tab-target="catalog" role="tab" aria-selected="false" aria-controls="tab-catalog" id="tab-btn-catalog">
+            <span class="tab-icon">📚</span>
+            <span class="tab-label">Courses Catalog</span>
+          </button>
+        </nav>
+
+        <!-- Header Actions: Live Badge & Dark/Light Switch -->
+        <div class="header-actions">
+          <div class="status-pill" title="Admissions currently open for new students">
+            <span class="status-dot-pulse"></span>
+            <span>Admissions Active 2026-27</span>
+          </div>
+
+          <!-- Modern Dark Mode / Light Mode Toggle -->
+          <div class="theme-switch-wrapper">
+            <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle theme mode" title="Switch between Dark and Light mode">
+              <span class="theme-icon-sun">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="5"></circle>
+                  <line x1="12" y1="1" x2="12" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="23"></line>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  <line x1="1" y1="12" x2="3" y2="12"></line>
+                  <line x1="21" y1="12" x2="23" y2="12"></line>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+              </span>
+              <span class="theme-icon-moon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+              </span>
+              <span class="theme-toggle-thumb"></span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       Main Content Container with Tab Panels
+       ========================================================================= -->
+  <main class="container tab-view-container">
+
+    <!-- =======================================================================
+         TAB 1: OVERVIEW / HOME
+         ======================================================================= -->
+    <div class="tab-pane active" id="tab-overview" role="tabpanel" aria-labelledby="tab-btn-overview">
+      
+      <!-- Welcome Hero Banner -->
+      <div class="hero-banner-card">
+        <div class="hero-badge-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Unified Student Portal • Spring Session 2026-27
+        </div>
+        <h1 class="hero-title-main">
+          Build In-Demand Tech Skills at <span class="hero-text-highlight">Smart Academy</span>
+        </h1>
+        <p class="hero-lead-text">
+          Access your centralized enrollment hub: test your admission eligibility instantly, calculate custom semester tuition packages with multi-month savings, and explore practical career-aligned curricula.
+        </p>
+
+        <!-- Primary Action Shortcuts on Banner -->
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <button type="button" class="btn btn-primary" data-tab-target="eligibility">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            Check Admission Eligibility 🎓
+          </button>
+          <button type="button" class="btn btn-secondary" data-tab-target="calculator">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line></svg>
+            Estimate Tuition Fees 💰
+          </button>
+        </div>
+      </div>
+
+      <!-- Key Academic Stats Bar -->
+      <div class="portal-stats-bar">
+        <div class="stat-chip">
+          <div class="stat-chip-icon icon-blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          </div>
+          <div class="stat-chip-info">
+            <div class="stat-chip-value">4 Career Tracks</div>
+            <div class="stat-chip-label">High-Growth Programs</div>
+          </div>
+        </div>
+        <div class="stat-chip">
+          <div class="stat-chip-icon icon-green">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          </div>
+          <div class="stat-chip-info">
+            <div class="stat-chip-value">70%+ Direct</div>
+            <div class="stat-chip-label">Merit Admission Pass</div>
+          </div>
+        </div>
+        <div class="stat-chip">
+          <div class="stat-chip-icon icon-purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
+          <div class="stat-chip-info">
+            <div class="stat-chip-value">Rs. 3,500/mo</div>
+            <div class="stat-chip-label">Starting Flexible Tuition</div>
+          </div>
+        </div>
+        <div class="stat-chip">
+          <div class="stat-chip-icon icon-amber">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </div>
+          <div class="stat-chip-info">
+            <div class="stat-chip-value">Up to 10% Off</div>
+            <div class="stat-chip-label">Multi-Month Concession</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Cards Section -->
+      <div class="quick-actions-section">
+        <h3 class="section-headline">Instant Portal Tools & Services</h3>
+        <p class="section-subtitle">Select a tool below to navigate directly to its dedicated dashboard panel.</p>
+
+        <div class="quick-actions-grid">
+          
+          <!-- Card 1: Eligibility Checker -->
+          <div class="action-card">
+            <div class="action-card-icon" style="background: rgba(79, 70, 229, 0.12); color: #4f46e5;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+            </div>
+            <h4 class="action-card-title">Admission Eligibility Checker</h4>
+            <p class="action-card-desc">Submit your academic percentage to evaluate direct qualification status, counseling advisories, and get a printable verification slip.</p>
+            <button type="button" class="btn btn-primary" data-tab-target="eligibility" style="width: 100%;">
+              Launch Checker
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+
+          <!-- Card 2: Fee Calculator -->
+          <div class="action-card">
+            <div class="action-card-icon" style="background: rgba(16, 185, 129, 0.12); color: #10b981;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line></svg>
+            </div>
+            <h4 class="action-card-title">Interactive Tuition Calculator</h4>
+            <p class="action-card-desc">Calculate tuition fees dynamically for 1 to 12 months with automatic 5% and 10% multi-month discount breakdowns and receipt generator.</p>
+            <button type="button" class="btn btn-primary" data-tab-target="calculator" style="width: 100%;">
+              Launch Calculator
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+
+          <!-- Card 3: Courses Catalog -->
+          <div class="action-card">
+            <div class="action-card-icon" style="background: rgba(6, 182, 212, 0.12); color: #06b6d4;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            </div>
+            <h4 class="action-card-title">Professional Course Catalog</h4>
+            <p class="action-card-desc">Review detailed syllabi for Web Development, Graphic Design, AI/ML, and Freelancing tracks with direct tuition linkage.</p>
+            <button type="button" class="btn btn-secondary" data-tab-target="catalog" style="width: 100%;">
+              Explore Catalog
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Why Choose Smart Academy Pillars -->
+      <div>
+        <h3 class="section-headline" style="font-size: 1.25rem;">Why Students Choose Smart Academy</h3>
+        <p class="section-subtitle">Dedicated to empowering the next generation of creative and technical leaders.</p>
+
+        <div class="features-quad-grid">
+          <div class="feature-box">
+            <h4>💡 Industry-Driven Syllabi</h4>
+            <p>Every module is updated bi-annually to reflect modern frameworks, generative AI tools, and production design workflows.</p>
+          </div>
+          <div class="feature-box">
+            <h4>🎯 1-on-1 Mentorship</h4>
+            <p>Direct weekly code reviews and design critiques from practicing senior engineers and creative directors.</p>
+          </div>
+          <div class="feature-box">
+            <h4>🚀 Real-World Portfolios</h4>
+            <p>Graduate with 3+ live deployed projects and an optimized Upwork/LinkedIn profile ready to land client contracts.</p>
+          </div>
+          <div class="feature-box">
+            <h4>🤝 Career Placement Support</h4>
+            <p>Interview preparation, resume tailoring, and direct partner company referrals for high-performing graduates.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- =======================================================================
+         TAB 2: ELIGIBILITY CHECKER
+         ======================================================================= -->
+    <div class="tab-pane" id="tab-eligibility" role="tabpanel" aria-labelledby="tab-btn-eligibility">
+      
+      <div class="tab-header-banner">
+        <div class="tab-title-group">
+          <h2>Student Admission Eligibility Checker</h2>
+          <p>Evaluate your qualification tier based on official academic performance benchmarks.</p>
+        </div>
+        <button type="button" class="btn btn-secondary btn-sm" data-tab-target="calculator">
+          Go to Fee Calculator 💰
+        </button>
+      </div>
+
+      <div class="tool-grid-2col">
+        
+        <!-- Form Side -->
+        <div class="glass-card">
+          <div class="card-header-block">
+            <div class="card-title-group">
+              <div class="card-icon-pill">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+              </div>
+              <div>
+                <h3 class="card-title">Admission Evaluation Form</h3>
+                <p class="card-subtitle">Fill in student credentials to verify admission status</p>
+              </div>
+            </div>
+            <span class="card-tag">Required</span>
+          </div>
+
+          <form id="admission-form" novalidate>
+            <!-- Student Full Name -->
+            <div class="form-group">
+              <label for="student-name" class="form-label">
+                <span>Student Full Name <strong style="color: var(--danger)">*</strong></span>
+                <span class="form-label-hint">As per official identification</span>
+              </label>
+              <div class="input-wrapper">
+                <span class="input-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </span>
+                <input 
+                  type="text" 
+                  id="student-name" 
+                  class="form-control" 
+                  placeholder="e.g. Alex Henderson" 
+                  autocomplete="name"
+                  required
+                >
+              </div>
+              <div class="error-feedback" id="name-error">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                Please enter the student's full name.
+              </div>
+            </div>
+
+            <!-- Marks Percentage Input -->
+            <div class="form-group">
+              <label for="marks-percentage" class="form-label">
+                <span>Marks Percentage (%) <strong style="color: var(--danger)">*</strong></span>
+                <span class="form-label-hint">Range: 0% to 100%</span>
+              </label>
+              <div class="percentage-input-box">
+                <div class="percentage-field">
+                  <div class="input-wrapper">
+                    <span class="input-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="5" x2="5" y2="19"></line><circle cx="6.5" cy="6.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>
+                    </span>
+                    <input 
+                      type="number" 
+                      id="marks-percentage" 
+                      class="form-control" 
+                      placeholder="e.g. 78.5" 
+                      min="0" 
+                      max="100" 
+                      step="0.1"
+                      required
+                    >
+                    <span class="percentage-symbol">%</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Quick Preset Percentage Chips -->
+              <div class="preset-chips">
+                <span style="font-size: 0.72rem; color: var(--text-muted); align-self: center;">Quick Test:</span>
+                <button type="button" class="preset-chip" data-val="88">88% (Direct)</button>
+                <button type="button" class="preset-chip" data-val="72">72% (Direct)</button>
+                <button type="button" class="preset-chip" data-val="60">60% (Counselling)</button>
+                <button type="button" class="preset-chip" data-val="44">44% (Below)</button>
+              </div>
+
+              <div class="error-feedback" id="marks-error">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                Please enter a valid percentage between 0 and 100.
+              </div>
+            </div>
+
+            <!-- Course Selection -->
+            <div class="form-group">
+              <label class="form-label">
+                <span>Select Target Course <strong style="color: var(--danger)">*</strong></span>
+                <span class="form-label-hint">Choose professional track</span>
+              </label>
+
+              <div class="course-options-grid">
+                <!-- Web Development -->
+                <label class="course-radio-card">
+                  <input type="radio" name="admission-course" value="Web Development" checked>
+                  <div class="course-card-content">
+                    <div class="course-icon-badge">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                    </div>
+                    <div class="course-meta">
+                      <span class="course-name-label">Web Development</span>
+                      <span class="course-fee-tag">Rs. 5,000 / mo</span>
+                    </div>
+                  </div>
+                </label>
+
+                <!-- Graphic Design -->
+                <label class="course-radio-card">
+                  <input type="radio" name="admission-course" value="Graphic Design">
+                  <div class="course-card-content">
+                    <div class="course-icon-badge">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 10 10 0 0 0 10-10"></path></svg>
+                    </div>
+                    <div class="course-meta">
+                      <span class="course-name-label">Graphic Design</span>
+                      <span class="course-fee-tag">Rs. 4,000 / mo</span>
+                    </div>
+                  </div>
+                </label>
+
+                <!-- AI Course -->
+                <label class="course-radio-card">
+                  <input type="radio" name="admission-course" value="AI Course">
+                  <div class="course-card-content">
+                    <div class="course-icon-badge">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
+                    </div>
+                    <div class="course-meta">
+                      <span class="course-name-label">AI Course</span>
+                      <span class="course-fee-tag">Rs. 7,000 / mo</span>
+                    </div>
+                  </div>
+                </label>
+
+                <!-- Freelancing -->
+                <label class="course-radio-card">
+                  <input type="radio" name="admission-course" value="Freelancing">
+                  <div class="course-card-content">
+                    <div class="course-icon-badge">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                    </div>
+                    <div class="course-meta">
+                      <span class="course-name-label">Freelancing</span>
+                      <span class="course-fee-tag">Rs. 3,500 / mo</span>
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Form Action Buttons -->
+            <div class="btn-row">
+              <button type="submit" class="btn btn-primary" id="btn-check-eligibility" style="flex: 1;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                Check Admission Status
+              </button>
+              <button type="button" class="btn btn-secondary" id="btn-reset-form" title="Clear inputs">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M3 21v-5h5"></path></svg>
+                Reset
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Result Output Side -->
+        <div>
+          <!-- Default Empty Placeholder -->
+          <div class="result-card-placeholder" id="result-placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+            <div>
+              <p style="font-weight: 800; color: var(--text-main); font-size: 1.1rem;">Awaiting Student Input</p>
+              <p style="font-size: 0.85rem; margin-top: 4px; max-width: 320px;">Provide the student's full name, percentage, and course selection to evaluate admission criteria.</p>
+            </div>
+          </div>
+
+          <!-- Dynamic Result Card -->
+          <div class="admission-result-card" id="admission-result-card" role="region" aria-live="polite">
+            <div class="result-header">
+              <span class="result-header-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Official Admission Decision
+              </span>
+              <span class="token-badge" id="res-app-token">SA-2026-9481</span>
+            </div>
+
+            <div class="result-body">
+              <!-- Dynamic Status Badge Box -->
+              <div class="status-banner-badge" id="status-badge-container">
+                <span class="status-badge-icon" id="status-badge-emoji">🎉</span>
+                <div class="status-badge-content">
+                  <span class="status-badge-title" id="status-badge-title">Direct Admission Granted! 🎉</span>
+                  <span class="status-badge-desc" id="status-badge-desc">Candidate meets the merit bar for immediate seat allocation.</span>
+                </div>
+              </div>
+
+              <!-- Structured Summary Grid -->
+              <div class="summary-grid">
+                <div class="summary-item">
+                  <div class="summary-label">Student Name</div>
+                  <div class="summary-value" id="res-student-name">Alex Henderson</div>
+                </div>
+                <div class="summary-item">
+                  <div class="summary-label">Target Program</div>
+                  <div class="summary-value" id="res-course-name">Web Development</div>
+                </div>
+                <div class="summary-item">
+                  <div class="summary-label">Marks Percentage</div>
+                  <div class="summary-value" id="res-marks-score">82.5%</div>
+                </div>
+                <div class="summary-item">
+                  <div class="summary-label">Admission Category</div>
+                  <div class="summary-value" id="res-category-badge">Merit Direct</div>
+                </div>
+              </div>
+
+              <!-- Visual Score Progress Bar -->
+              <div class="score-meter-wrap">
+                <div class="score-meter-label">
+                  <span>Performance Benchmark</span>
+                  <span id="score-meter-percent-txt">82.5 / 100%</span>
+                </div>
+                <div class="score-meter-track">
+                  <div class="score-meter-fill fill-green" id="score-meter-bar" style="width: 82.5%;"></div>
+                </div>
+              </div>
+
+              <!-- Next Steps Guidance Note -->
+              <div style="font-size: 0.82rem; color: var(--text-muted); background: var(--card-subtle); padding: 0.85rem 1.1rem; border-radius: var(--radius-sm); margin-bottom: 1.25rem;" id="res-guidance-note">
+                💡 <strong>Next Steps:</strong> Proceed to the Course Fee Calculator to calculate semester fees with available tenure concessions.
+              </div>
+
+              <!-- Quick Action Buttons -->
+              <div class="result-footer-actions">
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-copy-admission" style="flex: 1;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  Copy Summary
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" id="btn-transfer-to-calc" style="flex: 1.3;">
+                  Calculate Fee for Course
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- =======================================================================
+         TAB 3: FEE CALCULATOR
+         ======================================================================= -->
+    <div class="tab-pane" id="tab-calculator" role="tabpanel" aria-labelledby="tab-btn-calculator">
+      
+      <div class="tab-header-banner">
+        <div class="tab-title-group">
+          <h2>Interactive Course Fee Calculator</h2>
+          <p>Estimate transparent semester costs with tiered concessions: 5% for 3–5 months, 10% for 6+ months.</p>
+        </div>
+        <button type="button" class="btn btn-secondary btn-sm" data-tab-target="eligibility">
+          Check Eligibility 🎓
+        </button>
+      </div>
+
+      <div class="tool-grid-2col">
+        
+        <!-- Controls Side -->
+        <div class="glass-card">
+          <div class="card-header-block">
+            <div class="card-title-group">
+              <div class="card-icon-pill">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line></svg>
+              </div>
+              <div>
+                <h3 class="card-title">Enrollment Parameters</h3>
+                <p class="card-subtitle">Select your course and flexible duration</p>
+              </div>
+            </div>
+            <span class="card-tag">Interactive</span>
+          </div>
+
+          <div class="calculator-layout">
+            
+            <!-- Step 1: Course Selection with Monthly Pricing -->
+            <div>
+              <label class="form-label">
+                <span>1. Select Academic Program</span>
+                <span class="form-label-hint">Official monthly tuition rates</span>
+              </label>
+
+              <div class="calc-course-grid">
+                
+                <!-- Web Development (Rs. 5,000/mo) -->
+                <label class="calc-course-card">
+                  <input type="radio" name="calc-course" value="Web Development" data-price="5000" checked>
+                  <div class="calc-card-box">
+                    <div class="calc-card-top">
+                      <div class="calc-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                      </div>
+                      <div class="calc-radio-indicator"></div>
+                    </div>
+                    <div>
+                      <div class="calc-course-title">Web Development</div>
+                      <div class="calc-rate-row">
+                        <span class="calc-rate-amount">Rs. 5,000</span>
+                        <span class="calc-rate-unit">/ month</span>
+                      </div>
+                    </div>
+                  </div>
+                </label>
+
+                <!-- Graphic Design (Rs. 4,000/mo) -->
+                <label class="calc-course-card">
+                  <input type="radio" name="calc-course" value="Graphic Design" data-price="4000">
+                  <div class="calc-card-box">
+                    <div class="calc-card-top">
+                      <div class="calc-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 10 10 0 0 0 10-10"></path></svg>
+                      </div>
+                      <div class="calc-radio-indicator"></div>
+                    </div>
+                    <div>
+                      <div class="calc-course-title">Graphic Design</div>
+                      <div class="calc-rate-row">
+                        <span class="calc-rate-amount">Rs. 4,000</span>
+                        <span class="calc-rate-unit">/ month</span>
+                      </div>
+                    </div>
+                  </div>
+                </label>
+
+                <!-- AI Course (Rs. 7,000/mo) -->
+                <label class="calc-course-card">
+                  <input type="radio" name="calc-course" value="AI Course" data-price="7000">
+                  <div class="calc-card-box">
+                    <div class="calc-card-top">
+                      <div class="calc-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
+                      </div>
+                      <div class="calc-radio-indicator"></div>
+                    </div>
+                    <div>
+                      <div class="calc-course-title">AI Course</div>
+                      <div class="calc-rate-row">
+                        <span class="calc-rate-amount">Rs. 7,000</span>
+                        <span class="calc-rate-unit">/ month</span>
+                      </div>
+                    </div>
+                  </div>
+                </label>
+
+                <!-- Freelancing (Rs. 3,500/mo) -->
+                <label class="calc-course-card">
+                  <input type="radio" name="calc-course" value="Freelancing" data-price="3500">
+                  <div class="calc-card-box">
+                    <div class="calc-card-top">
+                      <div class="calc-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                      </div>
+                      <div class="calc-radio-indicator"></div>
+                    </div>
+                    <div>
+                      <div class="calc-course-title">Freelancing</div>
+                      <div class="calc-rate-row">
+                        <span class="calc-rate-amount">Rs. 3,500</span>
+                        <span class="calc-rate-unit">/ month</span>
+                      </div>
+                    </div>
+                  </div>
+                </label>
+
+              </div>
+            </div>
+
+            <!-- Step 2: Duration Selector & Concession Engine -->
+            <div>
+              <div class="duration-control-card">
+                <div class="duration-header">
+                  <div>
+                    <div class="duration-title">2. Select Enrollment Duration</div>
+                    <div style="font-size: 0.78rem; color: var(--text-muted);">From 1 up to 12 months</div>
+                  </div>
+                  <div class="duration-counter-box">
+                    <button type="button" class="duration-stepper-btn" id="btn-decrement-month" aria-label="Decrease months">−</button>
+                    <span class="duration-display-val" id="duration-display">3 mo</span>
+                    <button type="button" class="duration-stepper-btn" id="btn-increment-month" aria-label="Increase months">+</button>
+                  </div>
+                </div>
+
+                <div class="range-slider-wrapper">
+                  <input 
+                    type="range" 
+                    id="duration-slider" 
+                    class="custom-range-slider" 
+                    min="1" 
+                    max="12" 
+                    value="3" 
+                    aria-label="Course duration slider in months"
+                  >
+                </div>
+
+                <!-- Quick Presets -->
+                <div class="duration-presets">
+                  <button type="button" class="duration-chip" data-months="1">1 Month (Standard)</button>
+                  <button type="button" class="duration-chip active" data-months="3">3 Months (5% Off)</button>
+                  <button type="button" class="duration-chip" data-months="6">6 Months (10% Off)</button>
+                  <button type="button" class="duration-chip" data-months="12">12 Months (10% Off)</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Active Discount Tier Indicator Banner -->
+            <div class="discount-rule-banner active-tier" id="discount-banner">
+              <span class="discount-rule-icon" id="discount-banner-icon">🎁</span>
+              <div class="discount-rule-content">
+                <div class="discount-rule-title" id="discount-banner-title">5% Multi-Month Concession Applied!</div>
+                <div style="color: inherit; opacity: 0.9;" id="discount-banner-sub">Qualifies under 3 to 5 months term rule. Upgrade to 6+ months for 10% maximum discount.</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Receipt Result Side -->
+        <div class="receipt-container">
+          <div class="fee-receipt">
+            
+            <div class="receipt-top">
+              <span class="receipt-badge-status">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                Official Estimate
+              </span>
+              <div class="receipt-heading">Tuition Breakdown</div>
+              <div class="receipt-subtext" id="receipt-quote-id">REF: SA-FEE-8821</div>
+            </div>
+
+            <div class="receipt-body">
+              <table class="receipt-table">
+                <tbody>
+                  <tr>
+                    <td class="receipt-label-col">Selected Program</td>
+                    <td class="receipt-val-col" id="rec-course-name">Web Development</td>
+                  </tr>
+                  <tr>
+                    <td class="receipt-label-col">Standard Monthly Rate</td>
+                    <td class="receipt-val-col" id="rec-monthly-rate">Rs. 5,000 / mo</td>
+                  </tr>
+                  <tr>
+                    <td class="receipt-label-col">Duration Enrolled</td>
+                    <td class="receipt-val-col" id="rec-duration">3 Months</td>
+                  </tr>
+                  <tr>
+                    <td class="receipt-label-col">Original Fee (Gross)</td>
+                    <td class="receipt-val-col" id="rec-original-fee">Rs. 15,000</td>
+                  </tr>
+                  <tr class="receipt-discount-row">
+                    <td class="receipt-label-col">
+                      Applied Concession
+                      <span class="discount-pill-tag" id="rec-discount-tag">5% OFF</span>
+                    </td>
+                    <td class="receipt-val-col" id="rec-discount-amount">- Rs. 750</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Final Payable Amount Highlight -->
+              <div class="receipt-total-box">
+                <div class="total-title-group">
+                  <span class="total-main-label">Final Payable Amount</span>
+                  <span class="total-sub-label" id="rec-savings-note">You save Rs. 750 with 5% discount</span>
+                </div>
+                <div class="total-amount-display" id="rec-final-amount">Rs. 14,250</div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="receipt-footer-actions">
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-copy-receipt" style="flex: 1;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  Copy Estimate
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" id="btn-print-estimate" style="flex: 1;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                  Print Receipt
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- =======================================================================
+         TAB 4: COURSES CATALOG
+         ======================================================================= -->
+    <div class="tab-pane" id="tab-catalog" role="tabpanel" aria-labelledby="tab-btn-catalog">
+      
+      <div class="tab-header-banner">
+        <div class="tab-title-group">
+          <h2>Specialized Technology & Creative Tracks</h2>
+          <p>Curated curriculums designed to help you build production-ready projects and master market-ready skills.</p>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm" data-tab-target="calculator">
+          Open Fee Calculator 💰
+        </button>
+      </div>
+
+      <div class="courses-grid-4">
+        
+        <!-- Track 1: Web Development -->
+        <article class="catalog-card">
+          <div>
+            <span class="catalog-badge-top">Full Stack & Frontend</span>
+            <div class="catalog-card-icon" style="background: rgba(79, 70, 229, 0.12); color: #4f46e5;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            </div>
+            <h3 class="catalog-card-title">Web Development</h3>
+            <p class="catalog-card-desc">Modern web engineering from HTML5, responsive CSS, React, Node.js to cloud deployment.</p>
+            <ul class="catalog-features-list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>React & Modern JavaScript</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>REST APIs & Databases</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Production Project Hosting</li>
+            </ul>
+          </div>
+          <div class="catalog-card-bottom">
+            <div class="catalog-price-wrap">
+              <span class="catalog-price-val">Rs. 5,000</span>
+              <span class="catalog-price-unit">per month</span>
+            </div>
+            <button type="button" class="btn-select-track" data-track="Web Development">
+              Calculate Fee
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- Track 2: Graphic Design -->
+        <article class="catalog-card">
+          <div>
+            <span class="catalog-badge-top">Visual & UI/UX</span>
+            <div class="catalog-card-icon" style="background: rgba(6, 182, 212, 0.12); color: #06b6d4;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 10 10 0 0 0 10-10"></path></svg>
+            </div>
+            <h3 class="catalog-card-title">Graphic Design</h3>
+            <p class="catalog-card-desc">Brand identity design, typography mastery, Figma UI/UX prototyping, Photoshop and Illustrator.</p>
+            <ul class="catalog-features-list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Brand Guidelines & Logos</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Figma App & Web Prototyping</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Creative Portfolio Review</li>
+            </ul>
+          </div>
+          <div class="catalog-card-bottom">
+            <div class="catalog-price-wrap">
+              <span class="catalog-price-val">Rs. 4,000</span>
+              <span class="catalog-price-unit">per month</span>
+            </div>
+            <button type="button" class="btn-select-track" data-track="Graphic Design">
+              Calculate Fee
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- Track 3: AI Course -->
+        <article class="catalog-card">
+          <div>
+            <span class="catalog-badge-top">GenAI & ML</span>
+            <div class="catalog-card-icon" style="background: rgba(147, 51, 234, 0.12); color: #9333ea;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
+            </div>
+            <h3 class="catalog-card-title">AI Course</h3>
+            <p class="catalog-card-desc">Deep dive into Generative AI models, Prompt Engineering, Python ML pipelines, and LLM orchestration.</p>
+            <ul class="catalog-features-list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Python for Machine Learning</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>LLM Fine-Tuning & Agents</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Automations & Workflow Ops</li>
+            </ul>
+          </div>
+          <div class="catalog-card-bottom">
+            <div class="catalog-price-wrap">
+              <span class="catalog-price-val">Rs. 7,000</span>
+              <span class="catalog-price-unit">per month</span>
+            </div>
+            <button type="button" class="btn-select-track" data-track="AI Course">
+              Calculate Fee
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- Track 4: Freelancing -->
+        <article class="catalog-card">
+          <div>
+            <span class="catalog-badge-top">Global Earnings</span>
+            <div class="catalog-card-icon" style="background: rgba(16, 185, 129, 0.12); color: #10b981;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            </div>
+            <h3 class="catalog-card-title">Freelancing</h3>
+            <p class="catalog-card-desc">Client acquisition on Upwork, Fiverr, proposal drafting, contract negotiation, and international invoicing.</p>
+            <ul class="catalog-features-list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Winning Upwork Proposals</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>Client Relationship Building</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>International Payment Setups</li>
+            </ul>
+          </div>
+          <div class="catalog-card-bottom">
+            <div class="catalog-price-wrap">
+              <span class="catalog-price-val">Rs. 3,500</span>
+              <span class="catalog-price-unit">per month</span>
+            </div>
+            <button type="button" class="btn-select-track" data-track="Freelancing">
+              Calculate Fee
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Academy Portal Footer -->
+  <footer class="academy-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="brand-logo-badge" style="width: 38px; height: 38px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+            </svg>
+          </div>
+          <div>
+            <div style="font-weight: 800; font-size: 1.1rem;">Smart Academy</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Empowering Next-Gen Tech Pioneers</div>
+          </div>
+        </div>
+
+        <nav class="footer-nav-links" aria-label="Footer quick navigation">
+          <button type="button" class="footer-nav-btn" data-tab-target="overview">Overview</button>
+          <button type="button" class="footer-nav-btn" data-tab-target="eligibility">Eligibility</button>
+          <button type="button" class="footer-nav-btn" data-tab-target="calculator">Calculator</button>
+          <button type="button" class="footer-nav-btn" data-tab-target="catalog">Catalog</button>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Smart Academy Inc. All rights reserved.</div>
+        <div>Academic Session 2026-27 • Institutional Portal</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Toast Notification -->
+  <div class="toast-box" id="toast-notification" role="status" aria-live="polite">
+    <span class="toast-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    </span>
+    <span id="toast-message">Notification message</span>
+  </div>
+
+  <!-- ==========================================================================
+       Embedded JavaScript Application Logic
+       ========================================================================== -->
+  <script>
+    (function() {
+      'use strict';
+
+      /* ------------------------------------------------------------------------
+         Official Course Pricing Map
+         ------------------------------------------------------------------------ */
+      const COURSE_DATA = {
+        'Web Development': { price: 5000, color: '#4f46e5' },
+        'Graphic Design': { price: 4000, color: '#06b6d4' },
+        'AI Course': { price: 7000, color: '#9333ea' },
+        'Freelancing': { price: 3500, color: '#10b981' }
+      };
+
+      /* ------------------------------------------------------------------------
+         Tab Navigation & Switching Logic
+         ------------------------------------------------------------------------ */
+      const tabButtons = document.querySelectorAll('.nav-tab-btn');
+      const tabPanes = document.querySelectorAll('.tab-pane');
+
+      function switchTab(targetTabId) {
+        // Update tab buttons
+        tabButtons.forEach(btn => {
+          const isTarget = btn.getAttribute('data-tab-target') === targetTabId;
+          btn.classList.toggle('active', isTarget);
+          btn.setAttribute('aria-selected', isTarget ? 'true' : 'false');
+        });
+
+        // Update tab panes
+        tabPanes.forEach(pane => {
+          const isTarget = pane.id === `tab-${targetTabId}`;
+          pane.classList.toggle('active', isTarget);
+        });
+
+        // Scroll to top of view
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Update hash without jumping
+        if (history.pushState) {
+          history.pushState(null, null, `#${targetTabId}`);
+        }
+      }
+
+      // Add click events to tab buttons
+      tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const target = btn.getAttribute('data-tab-target');
+          if (target) switchTab(target);
+        });
+      });
+
+      // Quick action buttons and links anywhere that have [data-tab-target]
+      document.querySelectorAll('[data-tab-target]').forEach(elem => {
+        if (!elem.classList.contains('nav-tab-btn')) {
+          elem.addEventListener('click', (e) => {
+            const target = elem.getAttribute('data-tab-target');
+            if (target) switchTab(target);
+          });
+        }
+      });
+
+      // Check initial URL hash on load (e.g. #eligibility, #calculator, #catalog)
+      window.addEventListener('load', () => {
+        const hash = window.location.hash.replace('#', '');
+        if (['overview', 'eligibility', 'calculator', 'catalog'].includes(hash)) {
+          switchTab(hash);
+        }
+      });
+
+      window.addEventListener('popstate', () => {
+        const hash = window.location.hash.replace('#', '');
+        if (['overview', 'eligibility', 'calculator', 'catalog'].includes(hash)) {
+          switchTab(hash);
+        } else {
+          switchTab('overview');
+        }
+      });
+
+      /* ------------------------------------------------------------------------
+         Theme Management (Dark / Light Mode)
+         ------------------------------------------------------------------------ */
+      const htmlElem = document.documentElement;
+      const themeToggleBtn = document.getElementById('theme-toggle-btn');
+
+      // Check saved theme or system preference
+      const savedTheme = localStorage.getItem('smart_academy_theme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setTheme(prefersDark ? 'dark' : 'light');
+      }
+
+      function setTheme(theme) {
+        htmlElem.setAttribute('data-theme', theme);
+        localStorage.setItem('smart_academy_theme', theme);
+      }
+
+      themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = htmlElem.getAttribute('data-theme') || 'light';
+        const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setTheme(nextTheme);
+        showToast(`Theme switched to ${nextTheme === 'dark' ? 'Dark' : 'Light'} Mode`);
+      });
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (!localStorage.getItem('smart_academy_theme')) {
+          setTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+
+      /* ------------------------------------------------------------------------
+         Toast Notification System
+         ------------------------------------------------------------------------ */
+      const toast = document.getElementById('toast-notification');
+      const toastMsg = document.getElementById('toast-message');
+      let toastTimer = null;
+
+      function showToast(message, duration = 3000) {
+        if (toastTimer) clearTimeout(toastTimer);
+        toastMsg.textContent = message;
+        toast.classList.add('show');
+        toastTimer = setTimeout(() => {
+          toast.classList.remove('show');
+        }, duration);
+      }
+
+      /* ------------------------------------------------------------------------
+         Confetti Effect for Direct Admission (70%+)
+         ------------------------------------------------------------------------ */
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      let confettiAnimationId = null;
+      let particles = [];
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      function launchConfetti() {
+        if (confettiAnimationId) cancelAnimationFrame(confettiAnimationId);
+        particles = [];
+        const colors = ['#4f46e5', '#06b6d4', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6'];
+        
+        for (let i = 0; i < 90; i++) {
+          particles.push({
+            x: canvas.width / 2 + (Math.random() * 240 - 120),
+            y: canvas.height * 0.4 + (Math.random() * 80 - 40),
+            vx: (Math.random() - 0.5) * 14,
+            vy: (Math.random() * -12) - 4,
+            size: Math.random() * 8 + 4,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            rotation: Math.random() * 360,
+            rotSpeed: (Math.random() - 0.5) * 10,
+            opacity: 1,
+            decay: Math.random() * 0.012 + 0.008
+          });
+        }
+
+        function renderConfetti() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          let activeCount = 0;
+
+          particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.35; // gravity
+            p.rotation += p.rotSpeed;
+            p.opacity -= p.decay;
+
+            if (p.opacity > 0) {
+              activeCount++;
+              ctx.save();
+              ctx.translate(p.x, p.y);
+              ctx.rotate((p.rotation * Math.PI) / 180);
+              ctx.globalAlpha = Math.max(0, p.opacity);
+              ctx.fillStyle = p.color;
+              ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+              ctx.restore();
+            }
+          });
+
+          if (activeCount > 0) {
+            confettiAnimationId = requestAnimationFrame(renderConfetti);
+          } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+          }
+        }
+
+        renderConfetti();
+      }
+
+      /* ------------------------------------------------------------------------
+         SECTION 1: Admission Eligibility Checker Logic
+         Criteria:
+          * 70% or above -> High-priority Green Status Badge: "Direct Admission Granted! 🎉"
+          * 50% to 69% -> Blue Status Badge: "Eligible (Counselling Recommended) 👍"
+          * Below 50% -> Red Status Badge: "Below Criteria (Contact Admission Counsellor) 📞"
+         ------------------------------------------------------------------------ */
+      const admissionForm = document.getElementById('admission-form');
+      const studentNameInput = document.getElementById('student-name');
+      const marksInput = document.getElementById('marks-percentage');
+      const nameError = document.getElementById('name-error');
+      const marksError = document.getElementById('marks-error');
+      const btnReset = document.getElementById('btn-reset-form');
+
+      const resultPlaceholder = document.getElementById('result-placeholder');
+      const resultCard = document.getElementById('admission-result-card');
+      const resAppToken = document.getElementById('res-app-token');
+      const resStudentName = document.getElementById('res-student-name');
+      const resCourseName = document.getElementById('res-course-name');
+      const resMarksScore = document.getElementById('res-marks-score');
+      const resCategoryBadge = document.getElementById('res-category-badge');
+      const scoreMeterBar = document.getElementById('score-meter-bar');
+      const scoreMeterText = document.getElementById('score-meter-percent-txt');
+      const resGuidanceNote = document.getElementById('res-guidance-note');
+
+      const statusBadgeContainer = document.getElementById('status-badge-container');
+      const statusBadgeEmoji = document.getElementById('status-badge-emoji');
+      const statusBadgeTitle = document.getElementById('status-badge-title');
+      const statusBadgeDesc = document.getElementById('status-badge-desc');
+
+      const btnTransferToCalc = document.getElementById('btn-transfer-to-calc');
+      const btnCopyAdmission = document.getElementById('btn-copy-admission');
+
+      let currentEvaluatedData = null;
+
+      // Preset Chips Click Handlers
+      document.querySelectorAll('.preset-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          marksInput.value = chip.getAttribute('data-val');
+          marksInput.classList.remove('has-error');
+          marksError.classList.remove('show');
+        });
+      });
+
+      // Clear validation states on input
+      studentNameInput.addEventListener('input', () => {
+        if (studentNameInput.value.trim()) {
+          studentNameInput.classList.remove('has-error');
+          nameError.classList.remove('show');
+        }
+      });
+
+      marksInput.addEventListener('input', () => {
+        const val = parseFloat(marksInput.value);
+        if (!isNaN(val) && val >= 0 && val <= 100) {
+          marksInput.classList.remove('has-error');
+          marksError.classList.remove('show');
+        }
+      });
+
+      // Admission Form Submission
+      admissionForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const nameVal = studentNameInput.value.trim();
+        const marksVal = parseFloat(marksInput.value);
+        const selectedCourseRadio = document.querySelector('input[name="admission-course"]:checked');
+        const courseVal = selectedCourseRadio ? selectedCourseRadio.value : 'Web Development';
+
+        let isValid = true;
+
+        // Validate Full Name
+        if (!nameVal) {
+          studentNameInput.classList.add('has-error');
+          nameError.classList.add('show');
+          isValid = false;
+        } else {
+          studentNameInput.classList.remove('has-error');
+          nameError.classList.remove('show');
+        }
+
+        // Validate Marks
+        if (isNaN(marksVal) || marksVal < 0 || marksVal > 100) {
+          marksInput.classList.add('has-error');
+          marksError.classList.add('show');
+          isValid = false;
+        } else {
+          marksInput.classList.remove('has-error');
+          marksError.classList.remove('show');
+        }
+
+        if (!isValid) {
+          showToast('⚠️ Please correct the errors in the form.');
+          return;
+        }
+
+        // Generate dynamic application ID
+        const randomId = Math.floor(1000 + Math.random() * 9000);
+        const applicationToken = `SA-2026-${randomId}`;
+
+        // Evaluation Logic based on required criteria
+        let statusClass = '';
+        let badgeEmoji = '';
+        let badgeTitle = '';
+        let badgeDesc = '';
+        let categoryName = '';
+        let guidanceText = '';
+
+        if (marksVal >= 70) {
+          // 70% or above -> High-priority Green Status Badge: "Direct Admission Granted! 🎉"
+          statusClass = 'status-green';
+          badgeEmoji = '🎉';
+          badgeTitle = 'Direct Admission Granted! 🎉';
+          badgeDesc = 'Outstanding merit score! Direct qualification granted with priority class slot and scholarship eligibility.';
+          categoryName = 'Merit Direct Pass';
+          guidanceText = '🌟 Congratulations! Your seat is pre-reserved. You can proceed directly to fee estimation and term enrollment.';
+          scoreMeterBar.className = 'score-meter-fill fill-green';
+          launchConfetti();
+        } else if (marksVal >= 50 && marksVal < 70) {
+          // 50% to 69% -> Blue Status Badge: "Eligible (Counselling Recommended) 👍"
+          statusClass = 'status-blue';
+          badgeEmoji = '👍';
+          badgeTitle = 'Eligible (Counselling Recommended) 👍';
+          badgeDesc = 'Qualified for admission. Academic counselling recommended to finalize course track readiness.';
+          categoryName = 'Standard Eligible';
+          guidanceText = '📘 Candidate is eligible for admission. A short 15-minute academic orientation session will be scheduled.';
+          scoreMeterBar.className = 'score-meter-fill fill-blue';
+        } else {
+          // Below 50% -> Red Status Badge: "Below Criteria (Contact Admission Counsellor) 📞"
+          statusClass = 'status-red';
+          badgeEmoji = '📞';
+          badgeTitle = 'Below Criteria (Contact Admission Counsellor) 📞';
+          badgeDesc = 'Current academic percentage is below standard admission threshold. Special review required.';
+          categoryName = 'Counsellor Review';
+          guidanceText = '☎️ Please consult with our Student Support Office or take our Foundation Bridge module to meet enrollment prerequisites.';
+          scoreMeterBar.className = 'score-meter-fill fill-red';
+        }
+
+        // Update UI
+        resAppToken.textContent = applicationToken;
+        resStudentName.textContent = nameVal;
+        resCourseName.textContent = courseVal;
+        resMarksScore.textContent = marksVal.toFixed(1) + '%';
+        resCategoryBadge.textContent = categoryName;
+
+        scoreMeterBar.style.width = Math.min(100, Math.max(5, marksVal)) + '%';
+        scoreMeterText.textContent = `${marksVal.toFixed(1)} / 100%`;
+
+        statusBadgeContainer.className = `status-banner-badge ${statusClass}`;
+        statusBadgeEmoji.textContent = badgeEmoji;
+        statusBadgeTitle.textContent = badgeTitle;
+        statusBadgeDesc.textContent = badgeDesc;
+        resGuidanceNote.innerHTML = guidanceText;
+
+        // Show result card
+        resultPlaceholder.style.display = 'none';
+        resultCard.style.display = 'block';
+
+        currentEvaluatedData = {
+          token: applicationToken,
+          studentName: nameVal,
+          course: courseVal,
+          marks: marksVal,
+          statusTitle: badgeTitle,
+          statusClass: statusClass
+        };
+
+        showToast('✅ Eligibility Evaluated Successfully!');
+      });
+
+      // Reset Button Handler
+      btnReset.addEventListener('click', () => {
+        admissionForm.reset();
+        studentNameInput.classList.remove('has-error');
+        marksInput.classList.remove('has-error');
+        nameError.classList.remove('show');
+        marksError.classList.remove('show');
+        resultCard.style.display = 'none';
+        resultPlaceholder.style.display = 'flex';
+        currentEvaluatedData = null;
+        showToast('Form reset to default.');
+      });
+
+      // Copy Admission Result Summary
+      btnCopyAdmission.addEventListener('click', () => {
+        if (!currentEvaluatedData) return;
+        const summaryText = 
+`=== SMART ACADEMY ADMISSION DECISION ===
+Application Token: ${currentEvaluatedData.token}
+Student Name: ${currentEvaluatedData.studentName}
+Target Course: ${currentEvaluatedData.course}
+Marks Percentage: ${currentEvaluatedData.marks.toFixed(1)}%
+Status: ${currentEvaluatedData.statusTitle}
+Issued by: Smart Academy Academic Portal (2026-27)`;
+
+        navigator.clipboard.writeText(summaryText).then(() => {
+          showToast('📋 Admission summary copied to clipboard!');
+        }).catch(() => {
+          showToast('Summary generated.');
+        });
+      });
+
+      // Transfer Course to Fee Calculator Tab
+      btnTransferToCalc.addEventListener('click', () => {
+        if (!currentEvaluatedData) return;
+        const course = currentEvaluatedData.course;
+        
+        // Select matching course in calculator
+        const calcRadio = document.querySelector(`input[name="calc-course"][value="${course}"]`);
+        if (calcRadio) {
+          calcRadio.checked = true;
+          updateFeeCalculation();
+        }
+
+        // Switch to Calculator Tab
+        switchTab('calculator');
+        showToast(`Selected "${course}" in Fee Calculator!`);
+      });
+
+      /* ------------------------------------------------------------------------
+         SECTION 2: Interactive Course Fee Calculator Logic
+         Courses:
+          * Web Development: Rs. 5,000 / mo
+          * Graphic Design: Rs. 4,000 / mo
+          * AI Course: Rs. 7,000 / mo
+          * Freelancing: Rs. 3,500 / mo
+         Duration: Months (1 to 12)
+         Discount Rules:
+          * 3 to 5 months -> 5% discount
+          * 6+ months -> 10% discount
+         ------------------------------------------------------------------------ */
+      const calcCourseRadios = document.querySelectorAll('input[name="calc-course"]');
+      const durationSlider = document.getElementById('duration-slider');
+      const durationDisplay = document.getElementById('duration-display');
+      const btnDecMonth = document.getElementById('btn-decrement-month');
+      const btnIncMonth = document.getElementById('btn-increment-month');
+      const durationPresets = document.querySelectorAll('.duration-chip');
+
+      const discountBanner = document.getElementById('discount-banner');
+      const discountBannerIcon = document.getElementById('discount-banner-icon');
+      const discountBannerTitle = document.getElementById('discount-banner-title');
+      const discountBannerSub = document.getElementById('discount-banner-sub');
+
+      const recCourseName = document.getElementById('rec-course-name');
+      const recMonthlyRate = document.getElementById('rec-monthly-rate');
+      const recDuration = document.getElementById('rec-duration');
+      const recOriginalFee = document.getElementById('rec-original-fee');
+      const recDiscountTag = document.getElementById('rec-discount-tag');
+      const recDiscountAmount = document.getElementById('rec-discount-amount');
+      const recFinalAmount = document.getElementById('rec-final-amount');
+      const recSavingsNote = document.getElementById('rec-savings-note');
+      const receiptQuoteId = document.getElementById('receipt-quote-id');
+
+      const btnCopyReceipt = document.getElementById('btn-copy-receipt');
+      const btnPrintEstimate = document.getElementById('btn-print-estimate');
+
+      let currentFeeSummary = null;
+
+      // Currency Formatter Helper
+      function formatRs(amount) {
+        return 'Rs. ' + Math.round(amount).toLocaleString('en-IN');
+      }
+
+      function calculateFees() {
+        const selectedRadio = document.querySelector('input[name="calc-course"]:checked');
+        const courseName = selectedRadio ? selectedRadio.value : 'Web Development';
+        const monthlyRate = COURSE_DATA[courseName] ? COURSE_DATA[courseName].price : 5000;
+        const months = parseInt(durationSlider.value, 10) || 1;
+
+        // Gross Fee
+        const originalFee = monthlyRate * months;
+
+        // Discount Rules: 3 to 5 months -> 5% discount, 6+ months -> 10% discount
+        let discountPercent = 0;
+        let discountTitle = 'Standard Monthly Plan (No Discount)';
+        let discountSub = 'Enroll for 3 to 5 months to unlock a 5% discount, or 6+ months for 10%!';
+        let discountIcon = '💡';
+
+        if (months >= 6) {
+          discountPercent = 10;
+          discountTitle = '🔥 Maximum 10% Multi-Month Rebate Applied!';
+          discountSub = 'Tier 2 Concession: You are receiving the highest 10% long-term student concession.';
+          discountIcon = '🎉';
+        } else if (months >= 3) {
+          discountPercent = 5;
+          discountTitle = '🎉 5% Multi-Month Concession Applied!';
+          discountSub = 'Tier 1 Concession: 3 to 5 months plan. Extend to 6+ months to reach 10% discount!';
+          discountIcon = '✨';
+        }
+
+        const discountAmount = (originalFee * discountPercent) / 100;
+        const finalPayable = originalFee - discountAmount;
+        const effectiveMonthly = finalPayable / months;
+
+        return {
+          courseName,
+          monthlyRate,
+          months,
+          originalFee,
+          discountPercent,
+          discountAmount,
+          finalPayable,
+          effectiveMonthly,
+          discountTitle,
+          discountSub,
+          discountIcon
+        };
+      }
+
+      function updateFeeCalculation() {
+        const fees = calculateFees();
+        currentFeeSummary = fees;
+
+        // Update Duration Display
+        durationDisplay.textContent = `${fees.months} mo`;
+
+        // Update Preset Chips Active State
+        durationPresets.forEach(chip => {
+          const chipMonths = parseInt(chip.getAttribute('data-months'), 10);
+          if (chipMonths === fees.months) {
+            chip.classList.add('active');
+          } else {
+            chip.classList.remove('active');
+          }
+        });
+
+        // Update Discount Banner
+        discountBannerTitle.textContent = fees.discountTitle;
+        discountBannerSub.textContent = fees.discountSub;
+        discountBannerIcon.textContent = fees.discountIcon;
+
+        if (fees.discountPercent > 0) {
+          discountBanner.className = 'discount-rule-banner active-tier';
+        } else {
+          discountBanner.className = 'discount-rule-banner';
+        }
+
+        // Update Receipt Card Elements
+        recCourseName.textContent = fees.courseName;
+        recMonthlyRate.textContent = `${formatRs(fees.monthlyRate)} / mo`;
+        recDuration.textContent = `${fees.months} ${fees.months === 1 ? 'Month' : 'Months'}`;
+        recOriginalFee.textContent = formatRs(fees.originalFee);
+
+        if (fees.discountPercent > 0) {
+          recDiscountTag.style.display = 'inline-block';
+          recDiscountTag.textContent = `${fees.discountPercent}% OFF`;
+          recDiscountAmount.textContent = `- ${formatRs(fees.discountAmount)}`;
+          recSavingsNote.textContent = `You save ${formatRs(fees.discountAmount)} with ${fees.discountPercent}% discount (${formatRs(fees.effectiveMonthly)}/mo effective)`;
+        } else {
+          recDiscountTag.style.display = 'none';
+          recDiscountAmount.textContent = 'Rs. 0 (0%)';
+          recSavingsNote.textContent = 'Add 3+ months to unlock instant tuition discounts';
+        }
+
+        recFinalAmount.textContent = formatRs(fees.finalPayable);
+      }
+
+      // Event Listeners for Course Radios
+      calcCourseRadios.forEach(radio => {
+        radio.addEventListener('change', updateFeeCalculation);
+      });
+
+      // Duration Slider Event
+      durationSlider.addEventListener('input', updateFeeCalculation);
+
+      // Duration Increment / Decrement Stepper
+      btnDecMonth.addEventListener('click', () => {
+        let currentVal = parseInt(durationSlider.value, 10);
+        if (currentVal > 1) {
+          durationSlider.value = currentVal - 1;
+          updateFeeCalculation();
+        }
+      });
+
+      btnIncMonth.addEventListener('click', () => {
+        let currentVal = parseInt(durationSlider.value, 10);
+        if (currentVal < 12) {
+          durationSlider.value = currentVal + 1;
+          updateFeeCalculation();
+        }
+      });
+
+      // Duration Preset Chips Click
+      durationPresets.forEach(chip => {
+        chip.addEventListener('click', () => {
+          const months = parseInt(chip.getAttribute('data-months'), 10);
+          durationSlider.value = months;
+          updateFeeCalculation();
+        });
+      });
+
+      // Copy Receipt Text
+      btnCopyReceipt.addEventListener('click', () => {
+        if (!currentFeeSummary) return;
+        const quoteText = 
+`=== SMART ACADEMY TUITION ESTIMATE ===
+Reference: ${receiptQuoteId.textContent}
+Course: ${currentFeeSummary.courseName}
+Rate: ${formatRs(currentFeeSummary.monthlyRate)}/month
+Duration: ${currentFeeSummary.months} Months
+Original Gross Fee: ${formatRs(currentFeeSummary.originalFee)}
+Applied Discount: ${currentFeeSummary.discountPercent}% (-${formatRs(currentFeeSummary.discountAmount)})
+----------------------------------------
+FINAL PAYABLE AMOUNT: ${formatRs(currentFeeSummary.finalPayable)}
+Effective Monthly: ${formatRs(currentFeeSummary.effectiveMonthly)}/mo
+Smart Academy Admissions (2026-27)`;
+
+        navigator.clipboard.writeText(quoteText).then(() => {
+          showToast('🧾 Fee estimate breakdown copied to clipboard!');
+        }).catch(() => {
+          showToast('Estimate generated.');
+        });
+      });
+
+      // Print Estimate
+      btnPrintEstimate.addEventListener('click', () => {
+        window.print();
+      });
+
+      /* ------------------------------------------------------------------------
+         SECTION 3: Course Catalog "Calculate Fee" Buttons
+         ------------------------------------------------------------------------ */
+      document.querySelectorAll('.btn-select-track').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const track = btn.getAttribute('data-track');
+          if (!track) return;
+
+          // Update Admission Form selection
+          const admRadio = document.querySelector(`input[name="admission-course"][value="${track}"]`);
+          if (admRadio) admRadio.checked = true;
+
+          // Update Calculator selection
+          const calcRadio = document.querySelector(`input[name="calc-course"][value="${track}"]`);
+          if (calcRadio) {
+            calcRadio.checked = true;
+            updateFeeCalculation();
+          }
+
+          // Switch to Calculator tab
+          switchTab('calculator');
+          showToast(`Selected "${track}" in Fee Calculator!`);
+        });
+      });
+
+      /* ------------------------------------------------------------------------
+         Initialize Application State
+         ------------------------------------------------------------------------ */
+      updateFeeCalculation();
+      receiptQuoteId.textContent = `REF: SA-FEE-${Math.floor(1000 + Math.random() * 9000)}`;
+
+    })();
+  </script>
+</body>
+</html>
